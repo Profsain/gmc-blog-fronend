@@ -9,6 +9,8 @@ const AddPost = () => {
     tags: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -31,7 +33,10 @@ const AddPost = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        setMessage("Post added successfully");
+        setTimeout(() => {
+          setMessage("");
+        }, 2000);
         // clear form
         setFormData({
           title: "",
@@ -41,13 +46,15 @@ const AddPost = () => {
         });
       })
       .catch((error) => {
-        console.error("Error:", error);
+        setMessage("Error: Post not added", error);
+
       });
   };
 
   return (
     <Container>
       <h1>Add New Post</h1>
+      <p>{ message}</p>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicTitle">
           <Form.Label>Title</Form.Label>
