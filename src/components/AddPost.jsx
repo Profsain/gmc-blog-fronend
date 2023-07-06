@@ -33,6 +33,7 @@ const AddPost = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setMessage("Post added successfully");
         setTimeout(() => {
           setMessage("");
